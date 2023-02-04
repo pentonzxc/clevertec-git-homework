@@ -9,9 +9,9 @@ public class AutomateFamilyWeakness {
 
     public static void main(String[] args) throws Exception {
         String weakness = args[0];
-        String fileHeader = generateFileHeader(weakness);
+        String fileName = generateFileName(weakness);
         try {
-            Path path = generateFile(fileHeader);
+            Path path = generateFile(fileName);
             Files.writeString(path, String.format(TEXT_FORMAT, weakness));
         } catch (FileAlreadyExistsException e) {
             Files.writeString(Path.of(fileHeader), String.format(TEXT_FORMAT, weakness));
@@ -22,13 +22,13 @@ public class AutomateFamilyWeakness {
 
     }
 
-    public static String generateFileHeader(String weakness) {
-        String fileHeader = "family_" + weakness + "_weakness" + ".txt";
-        return fileHeader;
+    public static String generateFileName(String weakness) {
+        String name = "family_" + weakness + "_weakness" + ".txt";
+        return name;
     }
 
-    public static Path generateFile(String header) throws IOException {
-        Path path = Path.of(header);
+    public static Path generateFile(String name) throws IOException {
+        Path path = Path.of(name);
         var file = Files.createFile(path);
         return path;
     }
